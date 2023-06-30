@@ -1,0 +1,7 @@
+stuff/ 
+CMakeLists.txt.user
+.directory
+
+*.user
+build/
+heaptrack.*

@@ -1,0 +1,9 @@
+msgid "Fullscreen"
+msgstr ""
+
+msgid "FullscreenDesktop"
+msgstr ""
+
+msgid "Windowed"
+msgstr ""
+
