@@ -9,6 +9,7 @@
 #include "engine/utils/os.h"
 #include "engine/utils/string.h"
 #include "scenes/MainScene.h"
+#include "scenes/WorldScene.h"
 #include <chrono>
 #include <engine/core/SceneManager.h>
 #include <engine/core/gamewindow.h>
@@ -152,6 +153,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         mainScene->setGameWindow(&win);
         sceneManager.addScene("main", mainScene);
         sceneManager.setCurrentScene("main");
+
+        auto worldScene = std::make_shared<scenes::WorldScene>(&ren, &sceneManager, win.getSettings(), &input);
+        worldScene->setGameWindow(&win);
+        sceneManager.addScene("worldScene", worldScene);
 
         unsigned int lastTime = ren.getTickCount();
         unsigned int lastUpdateTime = ren.getTickCount();

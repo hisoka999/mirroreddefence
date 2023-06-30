@@ -88,7 +88,7 @@ namespace scenes
         {
                 APP_LOG_INFO("start game");
 
-                sceneManager->setCurrentScene("newGameScene");
+                sceneManager->setCurrentScene("worldScene");
         }
         bool MainScene::handleEvents(core::Input *pInput)
         {

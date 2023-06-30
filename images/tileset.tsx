@@ -20,6 +20,7 @@
    <wangtile tileid="4" wangid="2,2,2,1,2,2,2,2"/>
    <wangtile tileid="5" wangid="2,2,2,1,1,1,2,2"/>
    <wangtile tileid="6" wangid="2,2,2,2,2,1,2,2"/>
+   <wangtile tileid="7" wangid="2,2,2,2,2,2,2,2"/>
    <wangtile tileid="16" wangid="2,2,2,2,2,1,1,1"/>
    <wangtile tileid="17" wangid="2,2,2,2,2,2,2,2"/>
    <wangtile tileid="18" wangid="2,1,1,1,2,2,2,2"/>
