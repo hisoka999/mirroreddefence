@@ -9,7 +9,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/build"
             },
-            "command": "cmake --build ${workspaceRoot}/build --config release --target HeavenlyDefence",
+            "command": "cmake --build ${workspaceRoot}/build --config release --target MirrorDefience",
         },
         {
             "label": "cmake_debug",
@@ -17,7 +17,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/build"
             },
-            "command": "cmake --build ${workspaceRoot}/build --config debug --target HeavenlyDefence -j 8 --",
+            "command": "cmake --build ${workspaceRoot}/build --config debug --target MirrorDefience -j 8 --",
         },
     ]
 }

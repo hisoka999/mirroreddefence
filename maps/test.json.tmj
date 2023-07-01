@@ -57,9 +57,76 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"Waypoints",
+         "objects":[
+                {
+                 "height":0,
+                 "id":12,
+                 "name":"",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":-438,
+                         "y":0
+                        }, 
+                        {
+                         "x":-438,
+                         "y":-325
+                        }, 
+                        {
+                         "x":25.6667,
+                         "y":-325
+                        }, 
+                        {
+                         "x":25.6667,
+                         "y":-581
+                        }, 
+                        {
+                         "x":-513,
+                         "y":-582.5
+                        }, 
+                        {
+                         "x":-1113.67,
+                         "y":-575.167
+                        }, 
+                        {
+                         "x":-1113,
+                         "y":-281.167
+                        }, 
+                        {
+                         "x":-641,
+                         "y":-276.5
+                        }, 
+                        {
+                         "x":-636.333,
+                         "y":20.8333
+                        }, 
+                        {
+                         "x":-1155.67,
+                         "y":29.5
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1181,
+                 "y":674
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":3,
- "nextobjectid":12,
+ "nextlayerid":4,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.8.0",

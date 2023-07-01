@@ -8,7 +8,7 @@ namespace world
     private:
         /* data */
     public:
-        std::unique_ptr<world::World> loadWorld(const std::string &path);
+        std::unique_ptr<world::World> loadWorld(const std::string &path, int levelId);
 
         WorldLoader(/* args */);
         ~WorldLoader();

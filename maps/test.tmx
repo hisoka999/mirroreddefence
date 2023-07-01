@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="12">
+<map version="1.8" tiledversion="1.8.0" orientation="orthogonal" renderorder="right-down" width="40" height="24" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="13">
  <editorsettings>
   <export target="test.json.tmj" format="json"/>
  </editorsettings>
@@ -36,5 +36,10 @@
   <object id="7" type="Tower Places" x="128" y="160" width="480" height="64"/>
   <object id="8" type="Tower Places" x="96" y="224" width="64" height="128"/>
   <object id="9" type="Tower Places" x="160" y="288" width="448" height="64"/>
+ </objectgroup>
+ <objectgroup id="3" name="Waypoints">
+  <object id="12" x="1181" y="674">
+   <polyline points="0,0 -438,-0 -438,-325 25.6667,-325 25.6667,-581 -513,-582.5 -1113.67,-575.167 -1113,-281.167 -641,-276.5 -636.333,20.8333 -1155.67,29.5"/>
+  </object>
  </objectgroup>
 </map>

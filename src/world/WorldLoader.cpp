@@ -10,10 +10,9 @@ namespace world
 {
     WorldLoader::WorldLoader(/* args */)
     {
-        loadWorld("maps/test.json.tmj");
     }
 
-    std::unique_ptr<world::World> WorldLoader::loadWorld(const std::string &path)
+    std::unique_ptr<world::World> WorldLoader::loadWorld(const std::string &path, int levelId)
     {
         utils::JSON::Parser parser;
 
@@ -39,11 +38,14 @@ namespace world
         int height = object->getIntValue("height");
         std::vector<size_t> tiles;
         std::vector<graphics::Rect> towerPlaces;
+        std::vector<utils::Vector2> waypoints;
+
         for (auto &layer : layers)
         {
 
             auto layerObj = std::get<std::shared_ptr<utils::JSON::Object>>(layer);
             auto layerType = layerObj->getStringValue("type");
+            auto layerName = layerObj->getStringValue("name");
 
             if (layerObj->hasArray("data"))
             {
@@ -54,17 +56,31 @@ namespace world
                     tiles.push_back(std::get<int>(data[i]));
                 }
             }
-            else if (layerType == "objectgroup")
+            else if (layerType == "objectgroup" && layerName == "Tower Positions")
             {
                 auto objects = layerObj->getArray("objects");
                 for (auto &obj : objects)
                 {
                     auto ob = std::get<std::shared_ptr<utils::JSON::Object>>(obj);
-                    towerPlaces.push_back({float(ob->getIntValue("x")), float(ob->getIntValue("y")), float(ob->getIntValue("width")), float(ob->getIntValue("height"))});
+                    towerPlaces.push_back({float(ob->getFloatValue("x")), float(ob->getFloatValue("y")), float(ob->getFloatValue("width")), float(ob->getFloatValue("height"))});
+                }
+            }
+            else if (layerType == "objectgroup" && layerName == "Waypoints")
+            {
+                auto objects = layerObj->getArray("objects");
+
+                auto waypoint = std::get<std::shared_ptr<utils::JSON::Object>>(objects[0]);
+                float baseX = waypoint->getFloatValue("x");
+                float baseY = waypoint->getFloatValue("y");
+                for (auto &pos : waypoint->getArray("polyline"))
+                {
+                    auto position = std::get<std::shared_ptr<utils::JSON::Object>>(pos);
+
+                    waypoints.push_back({position->getFloatValue("x") + baseX, position->getFloatValue("y") + baseY});
                 }
             }
         }
-        return std::make_unique<World>(tiles, width, height, towerPlaces);
+        return std::make_unique<World>(levelId, tiles, width, height, towerPlaces, waypoints);
     }
 
     WorldLoader::~WorldLoader()

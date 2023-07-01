@@ -6,6 +6,14 @@
 #include <vector>
 #include <memory>
 #include "world/World.h"
+#include "world/Sprite.h"
+#include <optional>
+#include "world/WorldLoader.h"
+
+namespace UI
+{
+    class Container;
+};
 
 namespace scenes
 {
@@ -15,13 +23,16 @@ namespace scenes
     public:
         WorldScene(core::Renderer *pRenderer, core::SceneManager *pSceneManager, std::shared_ptr<utils::IniBase> settings, core::Input *input);
         virtual ~WorldScene();
-        void render();
-        bool handleEvents(core::Input *pInput);
+        void render() override;
+        void update() override;
+        void fixedUpdate(uint32_t delta) override;
+        bool handleEvents(core::Input *pInput) override;
 
         virtual void load();
 
     private:
         void drawUI();
+        void initUI();
         graphics::Rect buildTowerRect();
         core::SceneManager *sceneManager;
         UI::Container container;
@@ -30,6 +41,9 @@ namespace scenes
         std::shared_ptr<graphics::Texture> towerBase;
         std::shared_ptr<graphics::Text> font;
         int cash = 20;
+        std::optional<world::TowerType> towerToBuild;
+        bool upgrade = false;
+        world::WorldLoader worldLoader;
     };
 
 }

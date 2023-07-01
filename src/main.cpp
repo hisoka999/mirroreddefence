@@ -108,11 +108,11 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         generateEnumPot(fileName);
 #endif
 
-        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "HeavenlyDefence")) / "logs";
+        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "MirrorDefience")) / "logs";
         g_appLogger.init(loggingFolder, utils::LogLevel::warn);
         g_sglLogger.init(loggingFolder, utils::LogLevel::trace);
 
-        core::GameWindow win(utils::string_format("HeavenlyDefence %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "HeavenlyDefence");
+        core::GameWindow win(utils::string_format("MirrorDefience %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "MirrorDefience");
         win.setWindowIcon("logo.png");
 
         auto keyMap = initKeyMap(win.getSettings().get());
@@ -126,13 +126,13 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         if (!lang.empty())
         {
             Language lng = magic_enum::enum_cast<Language>(lang).value();
-            Localisation::Instance().loadLanguage(lng, "HeavenlyDefence");
+            Localisation::Instance().loadLanguage(lng, "MirrorDefience");
             Localisation::Instance().loadLanguage(lng, "enum");
             Localisation::Instance().loadLanguage(lng, "keymap");
         }
         else
         {
-            Localisation::Instance().detectLanguage("HeavenlyDefence");
+            Localisation::Instance().detectLanguage("MirrorDefience");
             Localisation::Instance().detectLanguage("enum");
             Localisation::Instance().detectLanguage("keymap");
         }
@@ -219,7 +219,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 
                 if (surf != 0)
                 {
-                    std::string fileName = utils::os::get_pref_dir("", "HeavenlyDefence") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
+                    std::string fileName = utils::os::get_pref_dir("", "MirrorDefience") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
                     std::cout << "screenshot: " << fileName << std::endl;
                     IMG_SavePNG(surf, fileName.c_str());
                     SDL_FreeSurface(surf);

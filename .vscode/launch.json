@@ -9,11 +9,11 @@
             "request": "launch",
             "type": "cppvsdbg",
             "windows": {
-                "program": "${workspaceFolder}\\build\\Debug\\HeavenlyDefence.exe",
+                "program": "${workspaceFolder}\\build\\Debug\\MirrorDefience.exe",
                 //"MIMode": "cppvsdbg",
             },
             "linux": {
-                "program": "${workspaceFolder}/build/HeavenlyDefence",
+                "program": "${workspaceFolder}/build/MirrorDefience",
                 "type": "cppdbg",
                 //"MIMode": "gdb",
             },
@@ -41,11 +41,11 @@
             "request": "launch",
             "type": "cppvsdbg",
             "windows": {
-                "program": "${workspaceFolder}\\build\\Release\\HeavenlyDefence.exe",
+                "program": "${workspaceFolder}\\build\\Release\\MirrorDefience.exe",
                 //"MIMode": "cppvsdbg",
             },
             "linux": {
-                "program": "${workspaceFolder}/build/HeavenlyDefence",
+                "program": "${workspaceFolder}/build/MirrorDefience",
                 "type": "cppdbg",
                 "MIMode": "gdb",
             },
