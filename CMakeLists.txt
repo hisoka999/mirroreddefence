@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(MirrorDefience VERSION 0.1 DESCRIPTION "MirrorDefience is a tower defence game.")
+project(MirroredDefence VERSION 0.1 DESCRIPTION "MirroredDefence is a tower defence game.")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -201,57 +201,57 @@ elseif(UNIX)
 endif()
 
 
-add_custom_command(TARGET MirrorDefience PRE_BUILD
+add_custom_command(TARGET MirroredDefence PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/fonts/ $<TARGET_FILE_DIR:MirrorDefience>/fonts/)
-add_custom_command(TARGET MirrorDefience PRE_BUILD
+                       ${CMAKE_SOURCE_DIR}/fonts/ $<TARGET_FILE_DIR:MirroredDefence>/fonts/)
+add_custom_command(TARGET MirroredDefence PRE_BUILD
                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                      ${CMAKE_SOURCE_DIR}/images/ $<TARGET_FILE_DIR:MirrorDefience>/images/)
-add_custom_command(TARGET MirrorDefience PRE_BUILD
+                      ${CMAKE_SOURCE_DIR}/images/ $<TARGET_FILE_DIR:MirroredDefence>/images/)
+add_custom_command(TARGET MirroredDefence PRE_BUILD
                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                      ${CMAKE_SOURCE_DIR}/locale/ $<TARGET_FILE_DIR:MirrorDefience>/locale/)
-add_custom_command(TARGET MirrorDefience PRE_BUILD
+                      ${CMAKE_SOURCE_DIR}/locale/ $<TARGET_FILE_DIR:MirroredDefence>/locale/)
+add_custom_command(TARGET MirroredDefence PRE_BUILD
                       COMMAND ${CMAKE_COMMAND} -E copy_directory
-                          ${CMAKE_SOURCE_DIR}/data/ $<TARGET_FILE_DIR:MirrorDefience>/data/)
-add_custom_command(TARGET MirrorDefience PRE_BUILD
+                          ${CMAKE_SOURCE_DIR}/data/ $<TARGET_FILE_DIR:MirroredDefence>/data/)
+add_custom_command(TARGET MirroredDefence PRE_BUILD
                           COMMAND ${CMAKE_COMMAND} -E copy_directory
-                              ${CMAKE_SOURCE_DIR}/music/ $<TARGET_FILE_DIR:MirrorDefience>/music/)
+                              ${CMAKE_SOURCE_DIR}/music/ $<TARGET_FILE_DIR:MirroredDefence>/music/)
 if(WIN32)
     if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
-        add_custom_command(TARGET MirrorDefience PRE_BUILD
+        add_custom_command(TARGET MirroredDefence PRE_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory
-                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x64/ $<TARGET_FILE_DIR:MirrorDefience>/libs)    
+                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x64/ $<TARGET_FILE_DIR:MirroredDefence>/libs)    
     else()
-        add_custom_command(TARGET MirrorDefience PRE_BUILD
+        add_custom_command(TARGET MirroredDefence PRE_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory
-                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x86/ $<TARGET_FILE_DIR:MirrorDefience>/libs)
+                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x86/ $<TARGET_FILE_DIR:MirroredDefence>/libs)
     endif()
 endif()
-INSTALL(TARGETS MirrorDefience DESTINATION MirrorDefience)
-INSTALL(TARGETS sgl DESTINATION MirrorDefience)
-INSTALL(DIRECTORY fonts DESTINATION MirrorDefience )
-INSTALL(DIRECTORY images DESTINATION MirrorDefience )
-INSTALL(DIRECTORY locale DESTINATION MirrorDefience )
-INSTALL(DIRECTORY music DESTINATION MirrorDefience )
-INSTALL(DIRECTORY data DESTINATION MirrorDefience )
+INSTALL(TARGETS MirroredDefence DESTINATION MirroredDefence)
+INSTALL(TARGETS sgl DESTINATION MirroredDefence)
+INSTALL(DIRECTORY fonts DESTINATION MirroredDefence )
+INSTALL(DIRECTORY images DESTINATION MirroredDefence )
+INSTALL(DIRECTORY locale DESTINATION MirroredDefence )
+INSTALL(DIRECTORY music DESTINATION MirroredDefence )
+INSTALL(DIRECTORY data DESTINATION MirroredDefence )
 if(WIN32)
     if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
         install(
             DIRECTORY
             ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x64/
             DESTINATION
-            MirrorDefience
+            MirroredDefence
         )
     else()
     install(
         DIRECTORY
         ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x86/
         DESTINATION
-        MirrorDefience
+        MirroredDefence
     )
     endif()
 endif()
-set(CPACK_COMPONENTS_ALL "MirrorDefience")
+set(CPACK_COMPONENTS_ALL "MirroredDefence")
 set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "libsdl2-2.0-0 (>= 2.0), libsdl2-ttf-2.0-0 (>= 2.0), libsdl2-image-2.0-0 (>= 2.0), libsdl2-gfx-1.0-0 (>= 1.0), libsdl2-mixer-2.0-0 (>= 2.0)")
 set(CPACK_PACKAGE_VERSION "${GAME_VERSION_MAJOR}.${GAME_VERSION_MINOR}")
@@ -260,8 +260,8 @@ if(WIN32)
 else()
     SET(CPACK_GENERATOR "DEB;TGZ")
     SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Stefan Lüdtke") #required
-    SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/hisoka999/MirrorDefience")
-    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Capital World is a 2d isometric economy simulation game.")
+    SET(CPACK_DEBIAN_PACKAGE_HOMEPAGE "https://github.com/hisoka999/MirroredDefence")
+    SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Mirrored Defence is a small tower defence game with mirrored levels.")
     set(CPACK_DEBIAN_PACKAGE_SECTION "games")
 endif()
 INCLUDE(CPack)

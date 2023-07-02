@@ -9,11 +9,11 @@
             "request": "launch",
             "type": "cppvsdbg",
             "windows": {
-                "program": "${workspaceFolder}\\build\\Debug\\MirrorDefience.exe",
+                "program": "${workspaceFolder}\\build\\Debug\\MirroredDefence.exe",
                 //"MIMode": "cppvsdbg",
             },
             "linux": {
-                "program": "${workspaceFolder}/build/MirrorDefience",
+                "program": "${workspaceFolder}/build/MirroredDefence",
                 "type": "cppdbg",
                 //"MIMode": "gdb",
             },
@@ -41,11 +41,11 @@
             "request": "launch",
             "type": "cppvsdbg",
             "windows": {
-                "program": "${workspaceFolder}\\build\\Release\\MirrorDefience.exe",
+                "program": "${workspaceFolder}\\build\\Release\\MirroredDefence.exe",
                 //"MIMode": "cppvsdbg",
             },
             "linux": {
-                "program": "${workspaceFolder}/build/MirrorDefience",
+                "program": "${workspaceFolder}/build/MirroredDefence",
                 "type": "cppdbg",
                 "MIMode": "gdb",
             },

@@ -17,6 +17,7 @@ namespace world
         size_t maxHealth;
         size_t nextWaypoint;
         float progress = 0.0f;
+        size_t reward = 10;
     };
 
     struct Bullet
@@ -45,12 +46,15 @@ namespace world
     {
         int points = 0;
         int cash = 20;
+        int lives = 5;
     };
+
+    static int MAX_WAVE_TIMER = 30000;
 
     class World
     {
     private:
-        std::vector<size_t> tiles;
+        std::vector<std::vector<size_t>> tiles;
         std::shared_ptr<graphics::Texture> tileset;
         std::shared_ptr<graphics::Texture> towerBase;
         size_t width;
@@ -72,13 +76,13 @@ namespace world
         int enemiesLeft = 20;
         int lastEnemieSpawn = 0;
         int currentWave = 1;
-        int waveTimer = 60000;
+        int waveTimer = MAX_WAVE_TIMER;
         int levelId = 1;
 
     public:
-        World(int levelId, std::vector<size_t> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
+        World(int levelId, std::vector<std::vector<size_t>> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
               std::vector<utils::Vector2> waypoints);
-        World(int levelId, std::vector<size_t> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
+        World(int levelId, std::vector<std::vector<size_t>> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
               std::vector<utils::Vector2> waypoints, Player player);
         ~World();
 

@@ -36,7 +36,7 @@ namespace world
         auto layers = object->getArray("layers");
         int width = object->getIntValue("width");
         int height = object->getIntValue("height");
-        std::vector<size_t> tiles;
+        std::vector<std::vector<size_t>> tiles;
         std::vector<graphics::Rect> towerPlaces;
         std::vector<utils::Vector2> waypoints;
 
@@ -46,15 +46,17 @@ namespace world
             auto layerObj = std::get<std::shared_ptr<utils::JSON::Object>>(layer);
             auto layerType = layerObj->getStringValue("type");
             auto layerName = layerObj->getStringValue("name");
-
+            std::vector<size_t> tileLayer;
             if (layerObj->hasArray("data"))
             {
                 auto data = layerObj->getArray("data");
 
                 for (size_t i = 0; i < size_t(width * height); ++i)
                 {
-                    tiles.push_back(std::get<int>(data[i]));
+                    tileLayer.push_back(std::get<int>(data[i]));
                 }
+
+                tiles.push_back(tileLayer);
             }
             else if (layerType == "objectgroup" && layerName == "Tower Positions")
             {

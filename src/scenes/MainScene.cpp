@@ -35,7 +35,7 @@ namespace scenes
                 SDL_Color white =
                     {255, 255, 255, 0};
                 auto btnStart = std::make_shared<UI::Button>();
-                btnStart->setFont("fonts/arial.ttf", 14);
+                btnStart->setFont("fonts/PressStart2P-Regular.ttf", 14);
                 btnStart->setColor(white);
                 btnStart->setLabel(_("New Game"));
                 btnStart->setPos(450, 350);
@@ -45,8 +45,20 @@ namespace scenes
                 btnStart->connect(UI::Button::buttonClickCallback(), [&]()
                                   { startGame(); });
 
+                auto btnHighScore = std::make_shared<UI::Button>();
+                btnHighScore->setFont("fonts/PressStart2P-Regular.ttf", 14);
+                btnHighScore->setColor(white);
+                btnHighScore->setLabel(_("Highscore"));
+                btnHighScore->setPos(450, 400);
+                btnHighScore->setStaticWidth(150);
+
+                btnHighScore->connect(UI::Button::buttonClickCallback(), [&]()
+                                      { showHighScore(); });
+
+                container.addObject(btnHighScore);
+
                 auto btnSettings = std::make_shared<UI::Button>();
-                btnSettings->setFont("fonts/arial.ttf", 14);
+                btnSettings->setFont("fonts/PressStart2P-Regular.ttf", 14);
                 btnSettings->setColor(white);
                 btnSettings->setLabel(_("Settings"));
                 btnSettings->setPos(450, 450);
@@ -58,7 +70,7 @@ namespace scenes
                 container.addObject(btnSettings);
 
                 auto btnExit = std::make_shared<UI::Button>();
-                btnExit->setFont("fonts/arial.ttf", 14);
+                btnExit->setFont("fonts/PressStart2P-Regular.ttf", 14);
                 btnExit->setColor(white);
                 btnExit->setLabel(_("Exit Game"));
                 btnExit->setPos(450, 500);
@@ -90,6 +102,11 @@ namespace scenes
 
                 sceneManager->setCurrentScene("worldScene");
         }
+        void MainScene::showHighScore()
+        {
+                sceneManager->setCurrentScene("highScore");
+        }
+
         bool MainScene::handleEvents(core::Input *pInput)
         {
                 return winMgr->handleInput(pInput);

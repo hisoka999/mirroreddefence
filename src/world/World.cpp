@@ -31,7 +31,7 @@ namespace world
             throw SDLException("renderRotated::SDL_RenderCopyEx");
     }
 
-    World::World(int levelId, std::vector<size_t> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
+    World::World(int levelId, std::vector<std::vector<size_t>> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
                  std::vector<utils::Vector2> waypoints, Player player)
 
         : tiles(tiles), width(width), height(height), towerPlaces(towerPlaces), waypoints(waypoints), player(player), levelId(levelId)
@@ -58,7 +58,7 @@ namespace world
         launcherBullet = graphics::TextureManager::Instance().loadTexture("images/Missile.png");
     }
 
-    World::World(int levelId, std::vector<size_t> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
+    World::World(int levelId, std::vector<std::vector<size_t>> &tiles, size_t width, size_t height, std::vector<graphics::Rect> towerPlaces,
                  std::vector<utils::Vector2> waypoints)
         : tiles(tiles), width(width), height(height), towerPlaces(towerPlaces), waypoints(waypoints), levelId(levelId)
     {
@@ -90,19 +90,20 @@ namespace world
     void World::render(core::Renderer *renderer)
     {
         int tileset_width = tileset->getWidth() / 32;
-        for (size_t y = 0; y < height; ++y)
-        {
-            for (size_t x = 0; x < width; ++x)
+        for (size_t layer = 0; layer < tiles.size(); layer++)
+            for (size_t y = 0; y < height; ++y)
             {
-                size_t tile = tiles[x + (y * width)] - 1;
-                float tile_x = ((tile - int((tile / tileset_width) * tileset_width))) * 32;
-                float tile_y = int(tile / tileset_width) * 32;
-                graphics::Rect src{tile_x, tile_y,
-                                   32.f, 32.f};
-                graphics::Rect dest{float(x * 32), float(y * 32), 32.f, 32.f};
-                tileset->render(renderer, src, dest);
+                for (size_t x = 0; x < width; ++x)
+                {
+                    size_t tile = tiles[layer][x + (y * width)] - 1;
+                    float tile_x = ((tile - int((tile / tileset_width) * tileset_width))) * 32;
+                    float tile_y = int(tile / tileset_width) * 32;
+                    graphics::Rect src{tile_x, tile_y,
+                                       32.f, 32.f};
+                    graphics::Rect dest{float(x * 32), float(y * 32), 32.f, 32.f};
+                    tileset->render(renderer, src, dest);
+                }
             }
-        }
 
         for (auto &tower : towers)
         {
@@ -206,10 +207,18 @@ namespace world
             int distibution = enemyDistribution(gen);
             Enemie e{.id = lastId, .sprite = nullptr, .currentHealth = 20, .maxHealth = 20, .nextWaypoint = 1};
 
-            if (distibution < (10 * levelId))
+            if (levelId > 1 && distibution < 10)
+            {
+                e.maxHealth = 80;
+                e.currentHealth = 80;
+                e.reward = 100;
+                e.sprite = std::make_shared<Sprite>("images/BODY_skeleton_chain_armor.png", 4, 9);
+            }
+            else if (distibution < (10 * levelId))
             {
                 e.maxHealth = 40;
                 e.currentHealth = 40;
+                e.reward = 30;
                 e.sprite = std::make_shared<Sprite>("images/BODY_skeleton_leather_armor.png", 4, 9);
             }
             else
@@ -264,6 +273,9 @@ namespace world
             if (enemy.nextWaypoint == waypoints.size())
             {
                 player.points--;
+                player.lives--;
+                if (player.lives < 0)
+                    player.lives = 0;
                 destroyedEnemies.push_back(enemy);
             }
             if (enemy.currentHealth <= 0)
@@ -285,7 +297,7 @@ namespace world
                     enemy.currentHealth -= bullet.damage;
                     bulletToDelete.push_back(bullet);
                     if (enemy.currentHealth <= 0)
-                        player.cash += 100;
+                        player.cash += enemy.reward;
                     player.points++;
                     break;
                 }
@@ -381,11 +393,16 @@ namespace world
         // wave timer
 
         waveTimer -= delta;
+
         if (waveTimer <= 0 && currentWave < 3)
         {
-            waveTimer = 60000;
+            waveTimer = MAX_WAVE_TIMER;
             currentWave++;
             enemiesLeft += 20;
+        }
+        else if (waveTimer < 0)
+        {
+            waveTimer = 0;
         }
     }
 
@@ -434,6 +451,6 @@ namespace world
     }
     bool World::isWorldFinished()
     {
-        return currentWave == 3 && enemies.empty();
+        return (currentWave == 3 && enemies.empty() && waveTimer < MAX_WAVE_TIMER) || player.lives == 0;
     }
 } // namespace world

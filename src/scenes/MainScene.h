@@ -42,6 +42,7 @@ namespace scenes
 
                 void exitGame();
                 void startGame();
+                void showHighScore();
         };
 
 } /* namespace scenes */

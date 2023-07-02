@@ -10,6 +10,7 @@
 #include "engine/utils/string.h"
 #include "scenes/MainScene.h"
 #include "scenes/WorldScene.h"
+#include "scenes/HighScoreScene.h"
 #include <chrono>
 #include <engine/core/SceneManager.h>
 #include <engine/core/gamewindow.h>
@@ -108,11 +109,11 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         generateEnumPot(fileName);
 #endif
 
-        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "MirrorDefience")) / "logs";
+        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "MirroredDefience")) / "logs";
         g_appLogger.init(loggingFolder, utils::LogLevel::warn);
         g_sglLogger.init(loggingFolder, utils::LogLevel::trace);
 
-        core::GameWindow win(utils::string_format("MirrorDefience %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "MirrorDefience");
+        core::GameWindow win(utils::string_format("Mirrored Defience %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "MirroredDefience");
         win.setWindowIcon("logo.png");
 
         auto keyMap = initKeyMap(win.getSettings().get());
@@ -126,13 +127,13 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         if (!lang.empty())
         {
             Language lng = magic_enum::enum_cast<Language>(lang).value();
-            Localisation::Instance().loadLanguage(lng, "MirrorDefience");
+            Localisation::Instance().loadLanguage(lng, "MirroredDefence");
             Localisation::Instance().loadLanguage(lng, "enum");
             Localisation::Instance().loadLanguage(lng, "keymap");
         }
         else
         {
-            Localisation::Instance().detectLanguage("MirrorDefience");
+            Localisation::Instance().detectLanguage("MirroredDefence");
             Localisation::Instance().detectLanguage("enum");
             Localisation::Instance().detectLanguage("keymap");
         }
@@ -158,15 +159,17 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         worldScene->setGameWindow(&win);
         sceneManager.addScene("worldScene", worldScene);
 
+        auto highScore = std::make_shared<scenes::HighScoreScene>(&ren, &sceneManager);
+        highScore->setGameWindow(&win);
+        sceneManager.addScene("highScore", highScore);
+
         unsigned int lastTime = ren.getTickCount();
         unsigned int lastUpdateTime = ren.getTickCount();
 
         unsigned int frames = 0;
 
-        unsigned int fps = 0;
         graphics::Text text;
         text.openFont(utils::os::combine("fonts", "arial.ttf"), 22);
-        SDL_Color color = {200, 200, 0, 0};
 
         bool run = true;
         lastUpdateTime = 0;
@@ -193,7 +196,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
             if ((ren.getTickCount() - lastTime) >= 1000)
             {
                 lastTime = ren.getTickCount();
-                fps = frames;
                 frames = 0;
             }
             lastUpdateTime += ren.getTimeDelta();
@@ -205,11 +207,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
             }
             sceneManager.update();
 
-            int textPosX = mainCamera.getWidth() - 120;
-            int textPosY = mainCamera.getHeight() - 50;
-
-            text.render(&ren, "FPS: " + std::to_string(fps), color, textPosX, textPosY);
-            text.render(&ren, "FT: " + std::to_string(ren.getTimeDelta()) + "ms", color, textPosX, textPosY + 20);
             ren.renderPresent();
             if (saveScreenshot)
             {
@@ -219,7 +216,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 
                 if (surf != 0)
                 {
-                    std::string fileName = utils::os::get_pref_dir("", "MirrorDefience") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
+                    std::string fileName = utils::os::get_pref_dir("", "MirroredDefience") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
                     std::cout << "screenshot: " << fileName << std::endl;
                     IMG_SavePNG(surf, fileName.c_str());
                     SDL_FreeSurface(surf);

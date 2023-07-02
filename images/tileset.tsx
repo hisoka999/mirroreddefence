@@ -31,6 +31,7 @@
    <wangtile tileid="16" wangid="2,2,2,2,2,1,1,1"/>
    <wangtile tileid="17" wangid="2,2,2,2,2,2,2,2"/>
    <wangtile tileid="18" wangid="2,1,1,1,2,2,2,2"/>
+   <wangtile tileid="19" wangid="1,1,1,1,1,1,1,1"/>
    <wangtile tileid="20" wangid="2,1,1,1,2,2,2,2"/>
    <wangtile tileid="21" wangid="1,1,1,1,1,1,1,1"/>
    <wangtile tileid="22" wangid="2,2,2,2,2,1,1,1"/>

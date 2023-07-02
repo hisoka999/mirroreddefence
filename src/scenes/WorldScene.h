@@ -9,6 +9,7 @@
 #include "world/Sprite.h"
 #include <optional>
 #include "world/WorldLoader.h"
+#include "ui/windows/EnterNameWindow.h"
 
 namespace UI
 {
@@ -34,6 +35,7 @@ namespace scenes
         void drawUI();
         void initUI();
         graphics::Rect buildTowerRect();
+        void saveHighScore(world::Player player, std::string name);
         core::SceneManager *sceneManager;
         UI::Container container;
         std::unique_ptr<world::World> world;
@@ -44,6 +46,8 @@ namespace scenes
         std::optional<world::TowerType> towerToBuild;
         bool upgrade = false;
         world::WorldLoader worldLoader;
+        std::shared_ptr<windows::EnterNameWindow> enterNameWindow;
+        bool fadeOutTimer = 0;
     };
 
 }
