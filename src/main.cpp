@@ -109,11 +109,11 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
         generateEnumPot(fileName);
 #endif
 
-        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "MirroredDefience")) / "logs";
+        std::filesystem::path loggingFolder = std::filesystem::path(utils::os::get_pref_dir("", "MirroredDefence")) / "logs";
         g_appLogger.init(loggingFolder, utils::LogLevel::warn);
         g_sglLogger.init(loggingFolder, utils::LogLevel::trace);
 
-        core::GameWindow win(utils::string_format("Mirrored Defience %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "MirroredDefience");
+        core::GameWindow win(utils::string_format("Mirrored Defence %d.%d", GAME_VERSION_MAJOR, GAME_VERSION_MINOR), 1280, 720, "MirroredDefence");
         win.setWindowIcon("logo.png");
 
         auto keyMap = initKeyMap(win.getSettings().get());
@@ -216,7 +216,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 
                 if (surf != 0)
                 {
-                    std::string fileName = utils::os::get_pref_dir("", "MirroredDefience") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
+                    std::string fileName = utils::os::get_pref_dir("", "MirroredDefence") + "screenshot_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count()) + ".png";
                     std::cout << "screenshot: " << fileName << std::endl;
                     IMG_SavePNG(surf, fileName.c_str());
                     SDL_FreeSurface(surf);
@@ -236,8 +236,14 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
     }
     catch (SDLException &e)
     {
-        std::cerr << "SDL Exception: " << e.what() << std::endl;
+        APP_LOG_ERROR("SDL Exception: ")
+        APP_LOG_ERROR(e.what())
         return 1;
+    }
+    catch (std::runtime_error &e)
+    {
+        APP_LOG_ERROR("runtime Exception: ")
+        APP_LOG_ERROR(e.what())
     }
 
     return 0;

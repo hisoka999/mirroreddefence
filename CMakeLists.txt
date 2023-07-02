@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 
 project(MirroredDefence VERSION 0.1 DESCRIPTION "MirroredDefence is a tower defence game.")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
@@ -215,16 +215,16 @@ add_custom_command(TARGET MirroredDefence PRE_BUILD
                           ${CMAKE_SOURCE_DIR}/data/ $<TARGET_FILE_DIR:MirroredDefence>/data/)
 add_custom_command(TARGET MirroredDefence PRE_BUILD
                           COMMAND ${CMAKE_COMMAND} -E copy_directory
-                              ${CMAKE_SOURCE_DIR}/music/ $<TARGET_FILE_DIR:MirroredDefence>/music/)
+                              ${CMAKE_SOURCE_DIR}/maps/ $<TARGET_FILE_DIR:MirroredDefence>/maps/)
 if(WIN32)
     if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
         add_custom_command(TARGET MirroredDefence PRE_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory
-                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x64/ $<TARGET_FILE_DIR:MirroredDefence>/libs)    
+                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x64/ $<TARGET_FILE_DIR:MirroredDefence>)    
     else()
         add_custom_command(TARGET MirroredDefence PRE_BUILD
                         COMMAND ${CMAKE_COMMAND} -E copy_directory
-                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x86/ $<TARGET_FILE_DIR:MirroredDefence>/libs)
+                        ${PROJECT_SOURCE_DIR}/deps/vcpp/SDL2/lib/x86/ $<TARGET_FILE_DIR:MirroredDefence>)
     endif()
 endif()
 INSTALL(TARGETS MirroredDefence DESTINATION MirroredDefence)
@@ -234,6 +234,7 @@ INSTALL(DIRECTORY images DESTINATION MirroredDefence )
 INSTALL(DIRECTORY locale DESTINATION MirroredDefence )
 INSTALL(DIRECTORY music DESTINATION MirroredDefence )
 INSTALL(DIRECTORY data DESTINATION MirroredDefence )
+INSTALL(DIRECTORY maps DESTINATION MirroredDefence )
 if(WIN32)
     if("${CMAKE_GENERATOR_PLATFORM}" STREQUAL "x64")
         install(

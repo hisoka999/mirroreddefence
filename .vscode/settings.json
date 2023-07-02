@@ -97,10 +97,6 @@
         "span": "cpp",
         "csignal": "cpp"
     },
-    "terminal.integrated.shellArgs.windows": [
-        "/K",
-        "chcp 65001"
-    ],
     "cmakeExplorer.buildDir": "build/",
     "editor.formatOnSave": true,
     "cmake.parallelJobs": 12,
